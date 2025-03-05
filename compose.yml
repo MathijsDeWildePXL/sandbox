@@ -1,0 +1,44 @@
+version: "3.8"
+
+services:
+  # frontend:
+  #   build:
+  #     context: ./frontend
+  #   ports:
+  #     - "3000:3000"
+  #   depends_on:
+  #     - backend
+
+  # backend:
+  #   build:
+  #     context: ./backend
+  #   ports:
+  #     - "8080:8080"
+  #   environment:
+  #     - SPRING_APPLICATION_NAME=PXLMosselsouper
+  #     - SPRING_DATASOURCE_URL=jdbc:postgresql://database:5432/mosselsouper-localdev?loggerLevel=DEBUG
+  #     - SPRING_DATASOURCE_USERNAME=localdev
+  #     - SPRING_DATASOURCE_PASSWORD=localdev
+  #     - SPRING_DATASOURCE_DRIVER_CLASS_NAME=org.postgresql.Driver
+  #     - SPRING_JPA_SHOW_SQL=true
+  #     - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+  #     - SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT=org.hibernate.dialect.PostgreSQLDialect
+  #     - LOGGING_LEVEL_ROOT=warn
+  #     - LOGGING_LEVEL_ORG_SPRINGFRAMEWORK_WEB=debug
+  #     - LOGGING_LEVEL_ORG_HIBERNATE=error
+  #   depends_on:
+  #     - database
+
+  database:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: mosselsouper-localdev
+      POSTGRES_USER: localdev
+      POSTGRES_PASSWORD: localdev
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
